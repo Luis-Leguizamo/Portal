@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="plantilla/template :: head">
+</head>
+<body>
+	<header th:replace="/plantilla/template :: header"></header>
+
+	<div class="container">
+		
+	<div class="card bg-ligth">
+		<div class="card-header bg-dark text-white" th:text="${titulo}"></div>
+		<div class="card-body">
+					
+		<form th:action="@{/pacientes/create/save}" th:object="${paciente}" method="post">
+			<div class="form-group row">
+				<label class="col-md-2" for="nombre">Nombre completo:</label>
+				<input type="text" th:field="*{nombre}" class="form-control form-control-sm col-md-6" id="nombre" placeholder="Nombre Usuario">
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-md-2" for="documento">Numero Documento:</label>
+				<input type="text" th:field="*{documento}" class="form-control form-control-sm col-md-6" id="documento" placeholder="Numero Usuario">
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-md-2" for="email">Correo electrónico:</label>
+				<input type="text" th:field="*{email}" class="form-control form-control-sm col-md-6" id="email" placeholder="Correo Usuario">
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-md-2" for="password">Contraseña:</label>
+				<input type="text" th:field="*{password}" class="form-control form-control-sm col-md-6" id="password" placeholder="Contraseña Usuario">
+			</div>
+			
+			<div class="form-group row">
+				<label class="col-md-2" for="ciudad">Ciudad:</label>
+				<select th:field="*{ciudad}" class="form-control form-control-sm col-md-6" id="ciudad">
+					<option th:each="ciudad:${ciudades}"
+						th:value="${ciudad.id}"
+						th:text="${ciudad.ciudad}"
+					/>											
+				</select>
+			</div>
+
+			<div th:if="${param.success}">
+				Guardado correctamente
+			</div>
+			
+			<div class="card-footer bg-dark">			
+			<input type="submit" class="btn btn-primary btn-sm" value="Guardar"></input>
+		</form>
+		</div>		
+	</div>
+	</div>
+	
+	<footer th:replace="plantilla/template :: footer"></footer>
+	
+</body>
+</html>
